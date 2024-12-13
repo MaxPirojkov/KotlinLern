@@ -26,15 +26,14 @@ fun main() {
 
 fun seasonDefinition(monthNumber: Int): String {
    return when (monthNumber) {
-        1, 2, 12 ->
-            return "Winter"
+        !in 1..12 -> "Неверно указан месяц"
         3, 4, 5 ->
-            return "Spring"
+             "Spring"
         6, 7, 8 ->
-            return "Summer"
+             "Summer"
         9, 10, 11 ->
-            return "Autumn"
-        else -> "Invalid volume"
+             "Autumn"
+        else -> "Зима"
     }
 }
 
@@ -48,7 +47,7 @@ fun dogAgeInHuman(age: Int) {
     if (age < 3) {
         println(age * 10.5)
     } else {
-        println(age * 4)
+        println((age -2) * 4 + 21)
     }
 }
 
@@ -75,12 +74,20 @@ fun chooseTransport(distanceInKm: Double ){
 2 балла за каждые 100 рублей при сумме покупки до 1000 рублей и 5 баллов за каждые 100 рублей при сумме свыше этого.
  */
 
-fun countBonus(purchaseAmount: Int): Int {
-    return when (purchaseAmount) {
-        in 1..1_000 -> {
-            purchaseAmount / 100 * 2
+fun countBonus(purchaseAmount: Int) {
+    if (purchaseAmount > 0) {
+        val price = purchaseAmount / 100
+        val coefic: Int = if (price < 1000) {
+            2
+        } else {
+            5
         }
-        else -> purchaseAmount / 100 * 5
+         when {
+            purchaseAmount <= 1_000 -> {
+                price * coefic
+            }
+            else -> price * coefic
+        }
     }
 }
 
