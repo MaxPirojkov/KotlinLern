@@ -3,15 +3,15 @@ package org.example.kotlinlern.lesson8
 fun main() {
 //    println(convertText("Удача"))
 //    findDate("Пользователь вошел в систему -> 2021-12-01 09:48:23")
-//    cardMask()
-//    formatEmail()
-//    fileName()
-//    firstLetter()
+//    cardMask("4539 1488 0343 6467")
+//    formatEmail("username@example.com")
+//    fileName("C:/Пользователи/Документы/report.txt")
+//    firstLetter("Объектно-ориентированное программирование")
 //    multiply()
-//    multi2(80, 80)
-//    convertString()
-//    encrypt()
-//    decrypt()
+    multi2(80, 80)
+//    convertString("Объектно ориентированное программирование")
+//    encrypt("Kotlin")
+//    decrypt("oKltni")
 }
 
 /*
@@ -57,11 +57,10 @@ fun convertText(str: String): String {
  */
 
 fun findDate(str: String) {
-    val phrase = str.split(" ")
-    val date = phrase.indexOf("2021-12-01")
-    println(phrase[date])
-    val time = phrase.indexOf("09:48:23")
-    println(phrase[time])
+    val indexDateAndTime = str.indexOf(">") + 2
+    val date = str.substring(indexDateAndTime, indexDateAndTime + 10)
+    val time = str.substring(indexDateAndTime + 12)
+    println("$date, $time")
 }
 
 /*
@@ -69,8 +68,7 @@ fun findDate(str: String) {
 Описание: Дана строка с номером кредитной карты "4539 1488 0343 6467".
 Замаскируйте все цифры, кроме последних четырех, символами "*".
 */
-fun cardMask() {
-    val cardNumb = "4539 1488 0343 6467"
+fun cardMask(cardNumb: String) {
     println("**** **** **** ${cardNumb.substring(15)}")
 }
 
@@ -78,9 +76,9 @@ fun cardMask() {
 Задание 3: Форматирование Адреса Электронной Почты. Используй replace
 Описание: У вас есть электронный адрес "username@example.com". Преобразуйте его в строку "username [at] example [dot] com".
  */
-fun formatEmail() {
-    val email = "username@example.com"
-    println(email.replace("@", " [at] ").replace(".", " [dot] "))
+fun formatEmail(email: String) {
+    val result = email.replace("@", " [at] ").replace(".", " [dot] ")
+    println(result)
 }
 
 /*
@@ -88,10 +86,9 @@ fun formatEmail() {
 Описание: Дан путь к файлу "C:/Пользователи/Документы/report.txt". Извлеките название файла с расширением.
  */
 
-fun fileName() {
-    val path = "C:/Пользователи/Документы/report.txt"
+fun fileName(path: String) {
     val split = path.split("/")
-    println(split[3])
+    println(split[split.size-1])
 }
 
 
@@ -102,9 +99,8 @@ fun fileName() {
 Создайте аббревиатуру из начальных букв слов (например, "ООП").
  */
 
-fun firstLetter() {
-    val str = "Объектно-ориентированное программирование"
-    val split = str.split(" ")
+fun firstLetter(str: String) {
+    val split = str.split(" ", "-")
     var letter = ""
 
     for (i in split) {
@@ -119,17 +115,15 @@ fun firstLetter() {
 (можно использовать такой же подход как в задании 5, но накапливать не первые буквы
 а целиком слова, составленные из первой буквы с uppercase и оставшейся части слова)
  */
-fun convertString() {
-    val str = "Объектно ориентированное программирование"
+fun convertString(str: String) {
     val split = str.split(" ")
     var letter = ""
 
 
     for (i in split) {
-        letter += i.replaceFirstChar { it.uppercase() }
-        letter += " "
+        letter += i[0].uppercase() + i.substring(1) + " "
     }
-    println(letter)
+    println(letter.trim())
 }
 
 
@@ -142,7 +136,7 @@ fun convertString() {
 Для выравнивания использовать функции форматирования строк с шаблоном (%s)
 */
 
-fun multiply() {
+fun  multiply() {
     for (i in 1..9) {
         print(String.format("%4s", "$i"))
     }
@@ -168,43 +162,29 @@ Kotlin шифруется в oKltni.
 Должно получиться два публичных метода: encrypt()
 и decrypt() которые принимают и возвращают строку.
  */
-fun encrypt() {
-    var str = "Kotlin"
-    var firstChar = ' '
-    var secondChar = ' '
-    var final = ""
-    var count = 0
+fun encrypt(str: String) {
+   var text = str
+    if (text.length % 2 != 0) {
+        text += " "
+    }
 
-    if (str.length % 2 != 0) {
-        str += " "
-    }
-    for (i in 0 until str.length / 2) {
-        secondChar = str[count]
-        count++
-        firstChar = str[count]
-        count++
-        final += firstChar
-        final += secondChar
-    }
-    println(final)
+    decrypt(text)
 }
 
-fun decrypt() {
-    var str = "oKltni"
+fun decrypt(str: String): String {
     var firstChar = ' '
     var secondChar = ' '
     var final = ""
     var count = 0
 
     for (i in 0 until str.length / 2) {
-        secondChar = str[count]
-        count++
-        firstChar = str[count]
-        count++
+        secondChar = str[count++]
+        firstChar = str[count++]
         final += firstChar
         final += secondChar
     }
     println(final)
+   return final
 }
 
 
@@ -212,16 +192,16 @@ fun decrypt() {
 Для усложнения задачи, можно в метод передавать размерность таблицы по вертикали
 и горизонтали и динамически рассчитывать количество пробелов для форматирования.
 */
-fun multi2(numb1: Int, numb2: Int) {
-    val space = numb2 / 10
+fun multi2(x: Int, y: Int) {
+    val space = y / 10
     print(String.format("%${space}s", ""))
-    for (i in 1..numb2) {
+    for (i in 1..y) {
         print(String.format("%${space}s", "$i"))
     }
     println()
-    for (i in 1..numb1) {
+    for (i in 1..x) {
         print(String.format("%${space}s", "$i"))
-        for (j in 1..numb2) {
+        for (j in 1..y) {
             print(String.format("%${space}s", i * j))
         }
         println()

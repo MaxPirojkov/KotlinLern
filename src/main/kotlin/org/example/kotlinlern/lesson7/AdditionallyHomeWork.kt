@@ -136,7 +136,7 @@ fun randomNumb() {
 // и выведите его элементы в обратном порядке с помощью цикла while.
 fun arrayRevers(){
     val numbers  = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    count = 9
+    count = numbers.size - 1
 
     while (count >= 0){
         println(numbers[count--])
@@ -180,7 +180,7 @@ fun fibonachiNumbers(){
     var a = 0
     var b = 1
     var c = 0
-    while (count < 4 ){
+    while (count < 50 ){
        c = a + b
         a = c
         b += a
