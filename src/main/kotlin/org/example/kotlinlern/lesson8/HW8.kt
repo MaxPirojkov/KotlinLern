@@ -8,7 +8,7 @@ fun main() {
 //    fileName("C:/Пользователи/Документы/report.txt")
 //    firstLetter("Объектно-ориентированное программирование")
 //    multiply()
-    multi2(80, 80)
+//    multi2(80, 80)
 //    convertString("Объектно ориентированное программирование")
 //    encrypt("Kotlin")
 //    decrypt("oKltni")
@@ -87,8 +87,8 @@ fun formatEmail(email: String) {
  */
 
 fun fileName(path: String) {
-    val split = path.split("/")
-    println(split[split.size-1])
+    val split = path.split("/").last()
+    println(split)
 }
 
 
@@ -136,7 +136,7 @@ fun convertString(str: String) {
 Для выравнивания использовать функции форматирования строк с шаблоном (%s)
 */
 
-fun  multiply() {
+fun multiply() {
     for (i in 1..9) {
         print(String.format("%4s", "$i"))
     }
@@ -163,7 +163,7 @@ Kotlin шифруется в oKltni.
 и decrypt() которые принимают и возвращают строку.
  */
 fun encrypt(str: String) {
-   var text = str
+    var text = str
     if (text.length % 2 != 0) {
         text += " "
     }
@@ -184,7 +184,7 @@ fun decrypt(str: String): String {
         final += secondChar
     }
     println(final)
-   return final
+    return final
 }
 
 
