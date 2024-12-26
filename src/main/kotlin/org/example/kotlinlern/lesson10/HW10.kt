@@ -27,12 +27,12 @@ fun main() {
     val setInt = setOf(1, 2, 3, 4, 5, 10)
 //    loopSet(setInt)
 //    findStrSet(setString, oneWord)
-    val setNum = setOf(1, 2, 3, 4, 5)
-    val setNum2 = setOf(2, 5, 7, 8)
+    val setNum = mutableSetOf(1, 2, 3, 4, 5)
+    val setNum2 = mutableSetOf(2, 5, 7, 8, 3)
 //    joinTwoSet(setNum, setNum2) // выведет 1, 2, 3, 4, 5, 7, 8
 //    commonElementsSet(setNum, setNum2) // выведет 2, 5
-//    difSets(setNum, setNum)
-    convertSetToList(setString)
+    difSets(setNum, setNum2)
+//    convertSetToList(setString)
 }
 
 //Работа с массивами Array
@@ -109,22 +109,16 @@ fun difTwoArrray() {
 //Задание 8: Поиск Индекса Элемента
 //Создайте массив целых чисел. Найдите индекс элемента со значением 5.
 //Если значения 5 нет в массиве, возвращаем -1. Реши задачу через цикл while.
-fun searchIndx(value: Int) {
+fun searchIndx(value: Int): Int {
     var count = 0
     val arrayNumb = arrayOf(1, 2, 4, 5, 6, 3)
-    var index = 0
-    while (count <= arrayNumb.last()) {
+    while (count < arrayNumb.size) {
         if (arrayNumb[count] == value) {
-            index = count
-            count++
+            return count
         }
         count++
     }
-    if (index != 0) {
-        println("Значение $value по индексу $index ")
-    } else {
-        println("-1")
-    }
+    return -1
 }
 
 /*
@@ -154,7 +148,7 @@ fun arrayEvenOdd() {
 fun searchElement(array: Array<String>, str: String) {
     for (i in array) {
         if (i.contains(str)) {
-            println("$i")
+            println(i)
         } else {
             println("строка не найдена")
         }
@@ -364,10 +358,11 @@ fun joinTwoSet(set1: Set<Int>, set2: Set<Int>) {
 Создайте два множества целых чисел и найдите их пересечение (общие элементы). Реши задачу через вложенные циклы.
 */
 fun commonElementsSet(set: Set<Int>, set2: Set<Int>) {
+    val set3 = mutableSetOf<Int>()
     for (i in set) {
         for (j in set2) {
             if (i == j) {
-                println(i)
+                set3.add(j)
             }
         }
     }
@@ -378,16 +373,24 @@ fun commonElementsSet(set: Set<Int>, set2: Set<Int>) {
 Создайте два множества строк и найдите разность первого множества относительно второго
 (элементы, присутствующие в первом множестве, но отсутствующие во втором).
 Реши задачу через вложенные циклы и переменные флаги.
+1, 2, 3, 4, 5
+3, 4, 5, 6, 7
 */
+
 fun difSets(set: Set<Int>, set2: Set<Int>) {
-    for (i in set) {
-        for (j in set2) {
-            if (i != j) {
-                println("$i - $j = ${i - j}")
+    val set3 = mutableSetOf<Int>()
+    var bool = true
+    for (i in 0..set.size) {
+        for (j in 0..set2.size) {
+            if (i == j) {
+
+
             }
         }
     }
+    println(set3)
 }
+
 
 /*
 Задание 11: Конвертация Множества в Список
@@ -395,7 +398,7 @@ fun difSets(set: Set<Int>, set2: Set<Int>) {
  */
 fun convertSetToList(set: Set<String>) {
     val list = mutableListOf<String>()
-    for (i in set){
+    for (i in set) {
         list += i
     }
     println(list)
