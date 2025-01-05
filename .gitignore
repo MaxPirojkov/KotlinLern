@@ -76,3 +76,7 @@ source-to-output.tab.values
 source-to-output.tab.values.at
 source-to-output.tab.values.s
 source-to-output.tab_i
+/build/
+.gradle/8.10/fileHashes/resourceHashesCache.bin
+build/classes/kotlin/main/META-INF/KotlinLern.kotlin_module
+build/classes/kotlin/main/org/example/kotlinlern/lesson12/HW12Kt.class

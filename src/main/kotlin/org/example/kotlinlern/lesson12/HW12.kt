@@ -7,8 +7,8 @@ fun main() {
     val stringLst = listOf("One", null, "Three")
 //    avarFun(lst)
 //    isEven(4)
-//   findFirstNegative(lst)
-    drawRectangle(3, 3)
+//    findFirstNegative(lst)
+//    drawRectangle(3, 3)
 }
 
 /*
@@ -34,16 +34,10 @@ fun stringFun(str: String) {
 
 /*
 Напишите сигнатуру функции, которая принимает список целых чисел и возвращает среднее значение типа Double.
-*/
+
 fun avarFun(list: List<Int>): Double {
-    var sum = 0
-    for (i in list) {
-        sum += i
-    }
-    return (sum).toDouble() / list.size
 }
 
-/*
 Напишите сигнатуру функции, которая принимает nullable строку и возвращает её длину в виде nullable целого числа.
 */
 fun nullFun(str: String?): Int? {
@@ -59,13 +53,12 @@ fun floatFun(): Float? {
 
 Напишите сигнатуру функции, которая принимает nullable список целых чисел и не возвращает значения.
 */
-fun nullFun(list: Int?) {
+fun nullFun(list: List<Int>?) {
 }
 
 /*
 Напишите сигнатуру функции, которая принимает целое число и возвращает nullable строку.
 fun intNull(numb: Int): String? {
-
 }
 
 Напишите сигнатуру функции, которая не принимает аргументов и возвращает список nullable строк.
@@ -82,20 +75,14 @@ fun nullString(str: String?, numb: Int?): Boolean? {
 Задача 1:
 Напишите функцию multiplyByTwo, которая принимает целое число и возвращает его, умноженное на 2.
 */
-fun multiplyByTwo(numb: Int): Int {
-    return numb * 2
-}
+fun multiplyByTwo(numb: Int) = numb * 2
 
 /*
 Задача 2:
-Создайте функцию isEven, которая принимает целое число и возвращает true, если число чётное, и false в противном случае.
+Создайте функцию isEven, которая принимает целое число
+и возвращает true, если число чётное, и false в противном случае.
 */
-fun isEven(numb: Int): Boolean {
-    if (numb % 2 == 0) {
-        return true
-    }
-    return false
-}
+fun isEven(numb: Int) = numb % 2 == 0
 
 /*
 Задача 3:
@@ -121,18 +108,12 @@ fun printNumbersUntil(n: Int) {
 Если отрицательных чисел нет, функция должна вернуть null.
 */
 fun findFirstNegative(list: List<Int>): Int? {
-    var flag = true
-    var numb = 0
     for (i in list) {
-        if (i > 0) {
-            flag = true
-        } else {
-            numb = i
-            flag = false
-            break
+        if (i < 0) {
+            return i
         }
     }
-    return if (flag) null else numb
+    return null
 }
 
 
@@ -144,7 +125,7 @@ fun findFirstNegative(list: List<Int>): Int? {
 и выводить каждую строку.
 Если встречается null значение,
 функция должна прекратить выполнение с помощью return без возврата значения.
- */
+*/
 fun processList(list: List<String?>) {
     for (i in list) {
         if (i == null) {
@@ -173,7 +154,7 @@ private fun drawRct(value: Int, nameValue: String) {
     if (value <= 0) throw IllegalArgumentException("$nameValue должно быть положительным и больше нуля")
 }
 
-private fun drawHorizonBorder(width: Int){
+private fun drawHorizonBorder(width: Int) {
     var line = "+"
     for (i in 1 until width - 1) {
         line += "-"
