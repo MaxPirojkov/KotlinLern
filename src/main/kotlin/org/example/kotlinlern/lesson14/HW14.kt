@@ -23,7 +23,7 @@ fun main() {
     3. В изменяемый словарь с данными о прохождении тестов добавьте новый тест и его результат.
     */
     val testResult = mutableMapOf<Int, String>()
-    testResult.putAll(mapOf())
+    testResult[1] = "Failed"
     /*
     4. Посчитайте количество успешных тестов в словаре с результатами.
     */
@@ -41,8 +41,8 @@ fun main() {
     выведите сообщение о странице и статусе её проверки.
     */
     val testResult1 = mapOf<String, Int>("http://url1" to 200, "http://url2" to 300, "http://url3" to 200)
-    for (entry in testResult1.entries) {
-        println("Page with url - ${entry.key}, ${entry.value} - статус ответа")
+    testResult1.forEach {
+        println("Page with url - ${it.key}, ${it.value} - статус ответа")
     }
 
     /*
@@ -58,7 +58,7 @@ fun main() {
     если endpoint отсутствует, предположите, что он не был протестирован.
     */
     val testResultApi = mapOf<String, String>()
-    println(testResultApi.getOrElse("/services") { throw Exception("not allowed") })
+    println(testResultApi.getOrDefault("/services") { "not allowed" })
     /*
     9. Из словаря, содержащего конфигурации тестового окружения
     (ключ — название параметра конфигурации),
@@ -77,12 +77,12 @@ fun main() {
     получите настройки для конкретной модели или верните настройки по умолчанию.
     */
     val mobileDevices = mapOf<String, String>()
-    println(mobileDevices.getOrElse("Pixel 6") { "Default Settings" })
+    println(mobileDevices.getOrDefault("Pixel 6") { "Default Settings" })
     /*
     12. Проверьте, содержит ли словарь с ошибками тестирования (код и описание) определенный код ошибки.
     */
     val testError = mapOf<Int, String>()
-    testError.contains(303)
+    testError.containsKey(303)
     /*
 
     13. Дан неизменяемый словарь, НЕ РЕШИЛ
@@ -92,7 +92,7 @@ fun main() {
     и   дентификаторы которых соответствуют определённой версии тестов.
     */
     val resultOfRegress = mapOf<String, String>()
-    resultOfRegress.filter { it.key == "TestID_Version" }
+    resultOfRegress.containsKey("TestID_Version")
     /*
     14. У вас есть словарь,
     где ключи — это названия функциональных модулей приложения,
@@ -100,12 +100,12 @@ fun main() {
     Проверьте, есть ли модули с неудачным тестированием.
     */
     val functionModuleApp = mapOf<String, String>()
-    val failedModel = functionModuleApp.filterValues { it == "failed" }
+    val failedModel = functionModuleApp.any { it.value == "failed" }
     /*
     15. Добавьте в изменяемый словарь с настройками тестовой среды настройки из другого словаря.
     */
-    val mutableSettingsDeviceMap: MutableMap<String, String> = mobileDevices.toMutableMap()
-
+    val mutableSettingsDeviceMap = mutableMapOf<String, String>()
+    mutableSettingsDeviceMap.putAll(mobileDevices)
     /*
     16. Объедините два неизменяемых словаря с данными о багах.
     */
@@ -126,19 +126,17 @@ fun main() {
 
     /*
     19. Удалите из словаря с конфигурациями тестирования набор устаревших конфигураций.
-    НЕ решил
-    не оч понял что значит устаревшие
-
+    */
+    // mutableMapTestRun.remove(1)
+    /*
     20. Создайте отчет о тестировании,
     преобразовав словарь с результатами тестирования
     (ключ — идентификатор теста, значение — результат)
     в список строк формата "Test ID: результат".
     */
     val mapReport = mapOf(100 to "Success", 101 to "Failed")
-    val listReport = mutableListOf<String>()
-    for (entries in mapReport.entries) {
-        listReport += "${entries.key} : ${entries.value}"
-    }
+    val listReport = mapReport.map { "${it.key} : ${it.value}" }
+
     /*
 
     21. Преобразуйте изменяемый словарь с результатами последнего тестирования в неизменяемый для архивации.
@@ -152,7 +150,8 @@ fun main() {
     (название можно получить вызвав фейковый метод,
     например getNameById(id: String))
     */
-
+    val idRunTestMap = mutableMapOf<String, String>()
+    idRunTestMap.mapKeys { getNameById(it.key) }
 
     /*
     23. Для словаря с оценками производительности различных версий приложения
@@ -182,7 +181,9 @@ fun main() {
         оставив только те тесты,
         которые не прошли успешно и содержат в названии “optional”.
         */
-    nameOfTests.filter { it.value == "Failed" && it.key.contains("optional") }
+    nameOfTests
+        .filterKeys { it.contains("optional") }
+        .filterValues { it == "Failed" }
 }
 
 fun getNameById(id: String) {
