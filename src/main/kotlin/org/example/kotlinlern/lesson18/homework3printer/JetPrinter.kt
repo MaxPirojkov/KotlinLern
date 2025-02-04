@@ -5,12 +5,21 @@ import org.example.kotlinlern.lesson18.homework.Colors
 
 class JetPrinter : Printer() {
     override fun print(string: String) {
+        val words = string.split(" ")
+        var colorIndex = 0
 
-        splitStringRandomColor(
-            string, listOfColors
-        )
+        for (word in words) {
+            val textColor = colorPairs[colorIndex].first
+            val background = colorPairs[colorIndex].second
+            printText(word, textColor, background)
+            colorIndex++
+            if (colorIndex >= colorPairs.size) {
+                colorIndex = 0
+            }
+        }
     }
-    val listOfColors: List<Pair<String, String>> = listOf(
+
+    private val colorPairs: List<Pair<String, String>> = listOf(
         Colors.BLUE to Background.BG_YELLOW,
         Colors.YELLOW to Background.BG_BLUE,
         Colors.RED to Background.BG_WHITE,

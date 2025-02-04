@@ -2,7 +2,6 @@ package org.example.kotlinlern.lesson18.homework21
 
 import org.example.kotlinlern.lesson18.homework.Background
 import org.example.kotlinlern.lesson18.homework.Colors
-import org.example.kotlinlern.lesson18.printColored
 
 const val INFO = "INFO"
 const val WARNING = "WARNING"
@@ -15,23 +14,24 @@ class Logger {
     }
 
     fun log(levelLog: String, message: String) {
-        if (levelLog == WARNING) {
-            printColored(message, Colors.YELLOW, Background.BG_BLUE)
-        } else if (levelLog == ERROR) {
-            printColored(message, Colors.WHITE, Background.BG_RED)
-        } else {
-            println("$levelLog: $message")
+        when (levelLog) {
+            WARNING -> printColoredBack("$levelLog: $message", Colors.YELLOW, Background.BG_BLUE)
+            ERROR -> printColoredBack("$levelLog: $message", Colors.WHITE, Background.BG_RED)
+            DEBUG -> printColoredBack("$levelLog: $message", Colors.GREEN, Background.BG_BLACK)
+            else -> println("$levelLog: $message")
         }
     }
 
     fun log(list: List<String>) {
-        for (i in list) {
-            println("$INFO: $i")
-        }
+        list.forEach { println("$INFO: $it") }
     }
 
     fun log(exp: Exception) {
         println("$ERROR: ${exp.message}")
+    }
+
+    fun printColoredBack(text: String, color: String, backgroundColor: String) {
+        println("$color$backgroundColor$text${Colors.RESET}")
     }
 }
 
@@ -46,11 +46,11 @@ fun main() {
     )
 
     val myLog = Logger()
-    // myLog.log(message)
-    // myLog.log(WARNING, message)
-    // myLog.log(ERROR, message)
-    // myLog.log(DEBUG, message)
-    // myLog.log(list)
+    myLog.log(message)
+    myLog.log(WARNING, message)
+    myLog.log(ERROR, message)
+    myLog.log(DEBUG, message)
+    myLog.log(list)
 
     try {
         throw Exception("Что то пошло не так")
