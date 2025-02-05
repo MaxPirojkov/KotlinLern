@@ -15,50 +15,15 @@ import org.example.kotlinlern.lesson20.homework.Programmable
 
  */
 
-class Fridge : DevicesTemperatureRegulatableOpenableForthTask(), Programmable {
-
-    override var maxTemperature: Int = 0
-
-    override fun setTemperature(temp: Int) {
-        println("$temp is set")
-    }
-
-    override fun open() {
-        println("Дверца открыта")
-    }
-
-    override fun close() {
-        println("Дверца закрыта")
-    }
-
-    override fun powerOn() {
-        isOn = true
-        println("Холодильник включен")
-    }
-
-    override fun powerOff() {
-        isOn = false
-        println("Холодильник выключен")
-    }
-
-    override fun programAction(action: String) {
-        println("$action программа запущена")
-    }
-
-    override fun execute() {
-        println("Программа выполнена")
-    }
-
+class Fridge : DevicesTemperatureRegulatableOpenableForthTask() {
 
     fun setTempr(temp: Int) {
         when {
             (!checkPowerIsOn()) ->
                 println("Холодильник выключен, необходимо включить холодильник для установки температуры")
 
-            (temp in maxTemperature..6) ->
-                println("Температура установлена на $temp")
-
-            else -> println("Ошибка: $temp - Недопустимая температура. Допустимый диапазон: 6..$maxTemperature градусов")
+            checkTempInRange(temp) -> setTemperature(temp)
+            else -> println("Ошибка: $temp - Недопустимая температура. Допустимый диапазон: 0..$maxTemperature градусов")
         }
     }
 
@@ -73,12 +38,14 @@ class Fridge : DevicesTemperatureRegulatableOpenableForthTask(), Programmable {
             }
         }
     }
+
+    override var maxTemperature: Int = 0
 }
 
 fun main() {
     val myFridge = Fridge()
-    myFridge.maxTemperature = 2
+    myFridge.maxTemperature = 6
     myFridge.powerOn()
-    myFridge.setTempr(3)
+    myFridge.setTempr(4)
     myFridge.setProgram("Быстрая заморозка")
 }

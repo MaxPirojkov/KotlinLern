@@ -3,8 +3,7 @@ package org.example.kotlinlern.lesson20.homework.fifthtask
 import org.example.kotlinlern.lesson20.homework.DevicesTemperatureRegulatableOpenableForthTask
 import org.example.kotlinlern.lesson20.homework.Timable
 
-class Oven: DevicesTemperatureRegulatableOpenableForthTask(), Timable {
-
+class Oven : DevicesTemperatureRegulatableOpenableForthTask(), Timable {
 
     override fun setTimer(time: Int) {
         println("Установлен таймер $time")
@@ -34,7 +33,7 @@ class Oven: DevicesTemperatureRegulatableOpenableForthTask(), Timable {
 
 fun main() {
     val oven = Oven()
-    oven.isOpen = false
-    oven.isOn = true
+    oven.open()
+    oven.powerOn()
     oven.startCookingOven(250)
 }

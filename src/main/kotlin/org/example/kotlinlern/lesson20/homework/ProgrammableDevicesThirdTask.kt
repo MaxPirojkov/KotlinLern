@@ -7,12 +7,12 @@ package org.example.kotlinlern.lesson20.homework
  */
 
 abstract class ProgrammableDevicesThirdTask: PowerableDevicesSecondTask(),  Programmable {
+
     override fun programAction(action: String) {
-        println("Program action is $action")
+        println("$action программа запущена")
     }
     override fun execute() {
-        println("Program is execute")
+        println("Программа выполнена")
     }
-
 
 }

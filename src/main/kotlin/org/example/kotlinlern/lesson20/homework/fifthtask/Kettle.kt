@@ -8,11 +8,6 @@ class Kettle : DevicesTemperatureRegulatableOpenableForthTask(), WaterContainer,
         get() = 100
         set(value) {}
 
-
-    override fun setTemperature(temp: Int) {
-        println("$temp - установлена температура для нагрева")
-    }
-
     override val capacity: Int
         get() = 1500
 
@@ -45,7 +40,7 @@ class Kettle : DevicesTemperatureRegulatableOpenableForthTask(), WaterContainer,
         }
     }
 
-    fun freeSpaceInKettle(capacity: Int, amount: Int): Boolean {
+    private fun freeSpaceInKettle(capacity: Int, amount: Int): Boolean {
         return (capacity - amount) > 0 && capacity > amount
     }
 
@@ -60,9 +55,9 @@ class Kettle : DevicesTemperatureRegulatableOpenableForthTask(), WaterContainer,
 
 fun main() {
     val kettle = Kettle()
-    kettle.isOpen = true
+    kettle.open()
     kettle.fillKettle(1000, 100)
-    kettle.isOn = true
-    kettle.isOpen = false
+    kettle.powerOn()
+    kettle.close()
     kettle.boilingWater(100)
 }

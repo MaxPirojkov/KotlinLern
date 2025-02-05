@@ -10,16 +10,9 @@ package org.example.kotlinlern.lesson20.homework
 abstract class DevicesTemperatureRegulatableOpenableForthTask : ProgrammableDevicesThirdTask(), TemperatureRegulatable,
     Openable {
 
-
-    open var isOpen: Boolean = false
-
-    open var isOn: Boolean = false
+    private var isOpen: Boolean = false
 
     private var currentTemperature: Int = 0
-
-    fun checkPowerIsOn(): Boolean {
-        return isOn
-    }
 
     fun checkIsOpen(): Boolean {
         return isOpen
@@ -27,23 +20,17 @@ abstract class DevicesTemperatureRegulatableOpenableForthTask : ProgrammableDevi
 
     abstract override var maxTemperature: Int
 
-
     override fun setTemperature(temp: Int) {
         currentTemperature = temp
         println("Установлена температура $temp")
+    }
+    fun checkTempInRange(temp: Int): Boolean{
+        return temp in 0..maxTemperature
     }
 
     fun checkSetTemperature(temp: Int): Boolean {
         currentTemperature = temp
         return (maxTemperature - currentTemperature) >= 0
-    }
-
-    override fun powerOn() {
-        isOn = true
-    }
-
-    override fun powerOff() {
-        isOn = false
     }
 
     override fun open() {

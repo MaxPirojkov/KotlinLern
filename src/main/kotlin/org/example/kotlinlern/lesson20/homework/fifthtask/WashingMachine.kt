@@ -13,13 +13,13 @@ import org.example.kotlinlern.lesson20.homework.*
 не имеет смысла при выключенном питании - добавь эту проверку.
  */
 class WashingMachine : DevicesTemperatureRegulatableOpenableForthTask(), WaterContainer, AutomaticShutdown,
-    Drainable, Timable, Programmable, Cleanable {
+    Drainable, Timable, Cleanable {
 
     fun washing(temp: Int, time: Int) {
         when {
             (!checkPowerIsOn()) -> println("Cтиральная машина выключена, необходимо включить для запуска программы")
-            (checkPowerIsOn() && isOpen) -> println("Загрузите белье и выберете программу")
-            (checkPowerIsOn() && !isOpen) -> startWashing(temp, time)
+            (checkPowerIsOn() && checkIsOpen()) -> println("Загрузите белье и выберете программу")
+            (checkPowerIsOn() && !checkIsOpen()) -> startWashing(temp, time)
         }
     }
 
@@ -31,18 +31,7 @@ class WashingMachine : DevicesTemperatureRegulatableOpenableForthTask(), WaterCo
         return println("Стирка началась").toString()
     }
 
-    override var maxTemperature: Int
-        get() = 65
-        set(value) {}
-
-
-    override fun open() {
-        isOpen = true
-    }
-
-    override fun close() {
-        isOpen = false
-    }
+    override var maxTemperature: Int = 80
 
     override val capacity: Int = 5
 
@@ -88,5 +77,4 @@ fun main() {
     washMachine.washing(40, 80)
     washMachine.close()
     washMachine.washing(40, 80)
-
 }
