@@ -10,9 +10,9 @@ package org.example.kotlinlern.lesson20.homework
 abstract class DevicesTemperatureRegulatableOpenableForthTask : ProgrammableDevicesThirdTask(), TemperatureRegulatable,
     Openable {
 
-    private var isOpen: Boolean = false
+    protected var isOpen: Boolean = false
 
-    private var currentTemperature: Int = 0
+    protected var currentTemperature: Int = 0
 
     fun checkIsOpen(): Boolean {
         return isOpen
