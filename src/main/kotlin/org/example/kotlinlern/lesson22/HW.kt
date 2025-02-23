@@ -16,7 +16,7 @@ fun main() {
     val myLong1 = null
     println(myLong1)
 
-    val myPair: Pair<Int?, Int?> = Pair(null, 2).revert()
+    val myPair = Pair(null, 2).revert()
     println(myPair) //(2, null)
 
     val myNumb = 10

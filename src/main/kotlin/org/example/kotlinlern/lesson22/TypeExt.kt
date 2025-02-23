@@ -1,6 +1,7 @@
 package org.example.kotlinlern.lesson22
 
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 /*
 1 Тренируемся составлять сигнатуру функции расширяющей класс.
@@ -69,7 +70,7 @@ fun Long?.funLong(): String {
 
  */
 fun <A, B> Pair<A?, B?>.revert(): Pair<B?, A?> {
-    return Pair(this.second, this.first)
+    return (second to first)
 }
 
 /*
@@ -88,7 +89,7 @@ other — число для сравнения
  */
 
 fun Number.within(other: Number, deviation: Number): Boolean {
-    return abs(this.toInt() - other.toInt()) <= deviation.toInt()
+    return (this.toInt() - other.toInt()).absoluteValue <= deviation.toInt()
 }
 
 /*
