@@ -22,7 +22,5 @@ fun main() {
             println(list[5])
     } catch (e: ArrayIndexOutOfBoundsException) {
         throw CheckRuntime(e)
-    } catch (e: CheckRuntime) {
-        println("CheckRuntime")
     }
 }
