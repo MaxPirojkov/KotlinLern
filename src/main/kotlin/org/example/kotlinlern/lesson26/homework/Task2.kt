@@ -37,12 +37,20 @@ fun sumByCondition(list: List<Int>, condition: (Int) -> Boolean): Int {
 // которая принимает две коллекции одного типа
 // и функцию для их объединения и преобразования в одну коллекцию другого типа.
 // Функция должна вернуть результат преобразования (коллекцию второго типа)
-fun combineAndTransform(
-    collection1: List<Int>,
-    collection2: List<Int>,
-    funcContain: (List<Int>, List<Int>) -> List<String>,
-): List<String> {
+fun <T, R> combineAndTransform(
+    collection1: List<T>,
+    collection2: List<T>,
+    funcContain: (List<T>, List<T>) -> List<R>,
+): List<R> {
     return funcContain(collection1, collection2)
+}
+
+fun <T, R, L: Collection<T>, M: Collection<R>> combineAndTransform1(
+    collection1: L,
+    collection2: L,
+    funContain: (L, L) -> M
+): M {
+    return funContain(collection1, collection2)
 }
 
 
@@ -72,7 +80,8 @@ fun main() {
     val myListInt1 = listOf(1, 2, 3)
     val myListInt2 = listOf(4, 5, 6)
     val combine = combineAndTransform(myListInt1, myListInt2) { list1, list2 -> (list1 + list2).map { it.toString() } }
-    val combine2 = combineAndTransform(myListInt1, myListInt2) {  list1, list2 -> (list1 + list2).map { "$it number of list " } }
+    val combine2 =
+        combineAndTransform(myListInt1, myListInt2) { list1, list2 -> (list1 + list2).map { "$it number of list " } }
 
     println(combine2)
 }
