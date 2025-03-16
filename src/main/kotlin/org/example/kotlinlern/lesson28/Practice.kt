@@ -4,9 +4,10 @@ import java.io.File
 
 fun main() {
     val myMap = mapOf("one" to 1.1, "two" to 2.2, "three" to 3.3)
-    writeDataToFile(myMap, "path/practice.file.txt")
+    //writeDataToFile(myMap, "path/practice.file.txt")
 
-    println( readTextAndTransform("path/practice.file.txt"))
+  //  println( readTextAndTransform("path/practice.file.txt"))
+    createFileOrDirectory("workspace/task1/example.txt")
 }
 
 fun createFileOrDirectory(path: String) {
@@ -34,3 +35,12 @@ fun readTextAndTransform(path: String): Map<String, Double> {
         str[0] to str[1].toDouble()
     }
 }
+
+/*
+Метод mkdirs() создаёт все необходимые родительские директории,
+если их ещё нет
+Метод createNewFile() создаёт сам файл, но только если его ещё не существует.
+Если файл уже есть, он не изменяется и не перезаписывается.
+Метод writeText() перезаписывает содержимое файла независимо от того,
+существовал файл до этого или был создан только что.
+ */

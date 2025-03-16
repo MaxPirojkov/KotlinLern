@@ -9,7 +9,7 @@ fun main() {
     val file = File("path/to/your/file.txt")
     val directory = File("path/to/your/")
 
-    file.parentFile.mkdirs()     //parentFile - вернет адрес родителя - path/to/your/        mkdirs() - создаст в путь до уазанного файла директори
+    file.parentFile.mkdirs()    //parentFile - вернет адрес родителя - path/to/your/        mkdirs() - создаст в путь до уазанного файла директори
 
     val isNewFileCreated: Boolean = file.createNewFile()
     if (isNewFileCreated) {
