@@ -1,6 +1,4 @@
-package org.example.kotlinlern.lesson29.homework
-
-import org.example.kotlinlern.lesson28.createFileOrDirectory
+package org.example.kotlinlern.lesson30.homework
 
 fun main() {
    // trafficLight()
