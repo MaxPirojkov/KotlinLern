@@ -36,8 +36,7 @@ fun main() {
         "Ivan",
         31,
         "Manager"
-    )
-    task2.apply {
+    ).apply {
         email = "ivan@mail.ru"
         department = "logistics"
     }

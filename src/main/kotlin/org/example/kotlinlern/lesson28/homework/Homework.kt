@@ -13,15 +13,15 @@ fun main() {
 //    createAndDeleteTask4("workspace/task4/temp")
 //    writeReadFile("workspace/task5/config/config.txt", myMap)
 //
-//    printAllTask6("workspace")
+    printAllTask6("workspace")
     //readmeTask7("workspace/task9/docs")
 
     // Task 8
-    createFileTask1("workspace/task10/data/1/4/prod/data14.mysql")
-    createFileTask1("workspace/task10/data/2/3/prod/data23.mysql")
-    createFileTask1("workspace/task10/data/5/2/prod/data52.mysql")
-    createDirectoryTask2("workspace/task10/backup")
-    backupTask8("workspace/task10/backup")
+//    createFileTask1("workspace/task10/data/1/4/prod/data14.mysql")
+//    createFileTask1("workspace/task10/data/2/3/prod/data23.mysql")
+//    createFileTask1("workspace/task10/data/5/2/prod/data52.mysql")
+//    createDirectoryTask2("workspace/task10/backup")
+//    backupTask8("workspace/task10/backup")
 
 }
 
@@ -142,21 +142,11 @@ fun writeReadFile(path: String, myMap: Map<String, Int>) {
 fun printAllTask6(path: String) {
     val dir = File(path)
 
-    val directories = mutableListOf<File>()
-    val files = mutableListOf<File>()
 
-    dir.walk().forEach { file ->
-        if (file.isDirectory) {
-            directories.add(file)
-        } else if (file.isFile) {
-            files.add(file)
-        }
+    var result = dir.walk().groupBy {
+        if (it.isDirectory) "Directory" else "File"
     }
-    println("--Директории--")
-    directories.forEach { println(it) }
-
-    println("--Файлы--")
-    files.forEach { println(it) }
+    println(result)
 }
 
 /*
@@ -202,14 +192,14 @@ fun backupTask8(path: String) {
 
     if (backUpDir.exists()) {
         baseDir.walk().filter { it.isFile }.forEach {
-                val backupFile = File(backUpDir, it.relativeTo(baseDir).path)
-                backupFile.parentFile.mkdirs()
-                if (backupFile.exists()) {
-                    println("${backupFile} файл уже существует")
-                } else {
-                    it.copyTo(backupFile, false)
-                    println("${it.name} файл бэкап создан")
-                }
+            val backupFile = File(backUpDir, it.relativeTo(baseDir).path)
+            backupFile.parentFile.mkdirs()
+            if (backupFile.exists()) {
+                println("${backupFile} файл уже существует")
+            } else {
+                it.copyTo(backupFile, false)
+                println("${it.name} файл бэкап создан")
+            }
         }
     } else {
         println("$backUpDir не существует")

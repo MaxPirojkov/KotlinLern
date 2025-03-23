@@ -8,7 +8,8 @@ class FileProcessorImpl() : FileProcessor {
 
         return if (directory.isDirectory && directory.exists()) {
             directory.walk()
-                .filter { it.isFile && it.extension == extension }.toList()
+                .filter { it.isFile && it.extension == extension }
+                .toList()
         } else {
             emptyList()
         }
@@ -16,10 +17,7 @@ class FileProcessorImpl() : FileProcessor {
 
     override fun encryptFiles(files: List<File>, encryptor: Encryptor) {
         files.filter { it.exists() }.forEach {
-            val encryptText = encryptor.encrypt(it.readText())
-            val newEncrFile: File = File(it.parent, it.nameWithoutExtension + "_encr." + it.extension)
-            newEncrFile.parentFile?.mkdirs()
-            newEncrFile.writeText(encryptText)
+            it.writeText(encryptor.encrypt(it.readText()))
         }
     }
 
