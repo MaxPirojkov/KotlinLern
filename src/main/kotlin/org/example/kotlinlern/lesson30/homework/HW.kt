@@ -55,7 +55,9 @@ enum class SunSystem(val weight: String, val distanceAE: Double) {
 человекочитаемые названия типов недвижимости в порядке возрастания длины названия enum.
  */
 fun printRealEstate() {
-    RealEstateType.entries.sortedBy { it.name.length }.forEach { println(it.type) }
+    RealEstateType.entries
+        .sortedBy { it.name.length }
+        .forEach { println(it.type) }
 }
 
 /*

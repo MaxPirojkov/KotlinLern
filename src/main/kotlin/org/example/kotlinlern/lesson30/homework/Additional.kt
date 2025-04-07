@@ -30,7 +30,10 @@ enum class Colors(val value: String) {
 
 const val LIGHT_SYMBOL = "\u25CF"
 
-enum class TrafficLightSignal(val color: Colors, val duration: Int, val blinkTimes: Int?) {
+enum class TrafficLightSignal(
+    val color: Colors,
+    val duration: Int,
+    val blinkTimes: Int?) {
     RED(Colors.RED_COLOR,4000, null),
     YELLOW(Colors.YELLOW_COLOR,2000, null),
     GREEN(Colors.GREEN_COLOR,4000, null),
@@ -91,29 +94,18 @@ enum class CoffeeType(val cost: Double, val coffeeBase: String, val recommendedS
     fun description() = println("The $coffeeBase ${if (this.hasMilk) "with" else "without"} milk costs \$${this.cost} and is best with ${this.recommendedSugar} spoons of sugar.")
 }
 
-enum class CharacterTypes {
-    CTO,
-    UX_UI,
-    CRM, // Customer Relationship Manager
-    GAME_DEV,
-    TEAM_LEAD,
-    BACKEND_DEV,
-    PM,
-    SYSADMIN,
-    QA
+enum class CharacterTypes(val favCoffee: CoffeeType) {
+    CTO(CoffeeType.ESPRESSO),
+    UX_UI(CoffeeType.LATTE),
+    CRM(CoffeeType.CAPPUCCINO), // Customer Relationship Manager
+    GAME_DEV(CoffeeType.LATTE),
+    TEAM_LEAD(CoffeeType.ESPRESSO),
+    BACKEND_DEV(CoffeeType.AMERICANO),
+    PM(CoffeeType.CAPPUCCINO),
+    SYSADMIN(CoffeeType.AMERICANO),
+    QA(CoffeeType.NESCAFE_CLASSIC)
 }
 
-fun coffeeVariant(type: CharacterTypes): CoffeeType {
-    return when(type) {
-        CharacterTypes.CTO -> CoffeeType.ESPRESSO
-        CharacterTypes.UX_UI -> CoffeeType.LATTE
-        CharacterTypes.CRM -> CoffeeType.CAPPUCCINO
-        CharacterTypes.GAME_DEV -> CoffeeType.LATTE
-        CharacterTypes.TEAM_LEAD -> CoffeeType.ESPRESSO
-        CharacterTypes.BACKEND_DEV -> CoffeeType.AMERICANO
-        CharacterTypes.PM -> CoffeeType.CAPPUCCINO
-        CharacterTypes.SYSADMIN -> CoffeeType.AMERICANO
-        CharacterTypes.QA -> CoffeeType.NESCAFE_CLASSIC
-    }
-}
+fun coffeeVariant(type: CharacterTypes) = type.favCoffee
+
 
