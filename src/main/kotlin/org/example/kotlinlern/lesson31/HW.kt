@@ -24,26 +24,28 @@ import java.io.File
 
  */
 
-data class Employee (
+data class Employee(
     val name: String,
     val statusWork: Boolean,
     val birthDay: String,
     val position: CharacterTypes,
-    val subordinatesList: List<Employee>?
+    val subordinatesList: List<Employee>
+
 )
 
 val qa1 = Employee(
     "Ku A",
     true,
     "07.01.1990",
-     CharacterTypes.QA,
-    null)
+    CharacterTypes.QA,
+    listOf()
+)
 val qa2 = Employee(
     "Que Ay",
     true,
     "02.02.1980",
     CharacterTypes.QA,
-    null
+    listOf()
 )
 
 val developer1 = Employee(
@@ -51,14 +53,14 @@ val developer1 = Employee(
     true,
     "09.09.1999",
     CharacterTypes.BACKEND_DEV,
-    null
+    listOf()
 )
 val developer2 = Employee(
     "Devel Poper",
     true,
     "10.02.1950",
     CharacterTypes.GAME_DEV,
-    null
+    listOf()
 )
 
 val designer = Employee(
@@ -66,7 +68,7 @@ val designer = Employee(
     true,
     "01.01.2000",
     CharacterTypes.UX_UI,
-    null
+    listOf()
 )
 
 val teamLead1 = Employee(
@@ -89,7 +91,8 @@ val cto: Employee = Employee(
     true,
     "10.10.1970",
     CharacterTypes.CTO,
-    listOf(teamLead1, teamLead2))
+    listOf(teamLead1, teamLead2)
+)
 
 
 fun main() {
@@ -100,7 +103,7 @@ fun main() {
 
     val json = gson.toJson(cto)
 
-    val file = File( "json/cto.json")
+    val file = File("json/cto.json")
     file.parentFile.mkdirs()
     file.createNewFile()
     file.writeText(json)

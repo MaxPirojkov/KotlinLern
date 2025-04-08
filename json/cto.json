@@ -15,21 +15,21 @@
           "statusWork": true,
           "birthDay": "01.01.2000",
           "position": "UX_UI",
-          "subordinatesList": null
+          "subordinatesList": []
         },
         {
           "name": "Devel Poper",
           "statusWork": true,
           "birthDay": "10.02.1950",
           "position": "GAME_DEV",
-          "subordinatesList": null
+          "subordinatesList": []
         },
         {
           "name": "Ku A",
           "statusWork": true,
           "birthDay": "07.01.1990",
           "position": "QA",
-          "subordinatesList": null
+          "subordinatesList": []
         }
       ]
     },
@@ -44,14 +44,14 @@
           "statusWork": true,
           "birthDay": "09.09.1999",
           "position": "BACKEND_DEV",
-          "subordinatesList": null
+          "subordinatesList": []
         },
         {
           "name": "Que Ay",
           "statusWork": true,
           "birthDay": "02.02.1980",
           "position": "QA",
-          "subordinatesList": null
+          "subordinatesList": []
         }
       ]
     }
