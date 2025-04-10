@@ -1,12 +1,12 @@
 package org.example.kotlinlern.lesson31.unittest.homework
 
+import org.example.kotlinlern.lesson13.isNotEmpty
 import kotlin.math.min
 
 class CerealStorageImpl(
     override val containerCapacity: Float,
     override val storageCapacity: Float
 ) : CerealStorage {
-    // Блок инициализации класса. Выполняется сразу при создании объекта
     init {
         require(containerCapacity >= 0) {
             "Ёмкость контейнера не может быть отрицательной"
@@ -30,11 +30,29 @@ class CerealStorageImpl(
     }
 
     override fun getCereal(cereal: Cereal, amount: Float): Float {
-        TODO("Not yet implemented")
+        require(amount >= 0) {
+            "Количество крупы не может быть отрицательным"
+        }
+        val currentAmount = getAmount(cereal)
+        return if (currentAmount >= amount) {
+            storage[cereal] = currentAmount - amount
+            amount
+        } else {
+            storage.remove(cereal)
+            currentAmount
+        }
+
     }
 
     override fun removeContainer(cereal: Cereal): Boolean {
-        TODO("Not yet implemented")
+        return when {
+            !storage.contains(cereal) -> false
+            getAmount(cereal) == 0f -> {
+                storage.remove(cereal)
+                true
+            }
+            else -> false
+        }
     }
 
     override fun getAmount(cereal: Cereal): Float {
@@ -46,7 +64,10 @@ class CerealStorageImpl(
     }
 
     override fun toString(): String {
-        TODO("Not yet implemented")
+        return when {
+            storage.size == 0 -> "Storage is empty"
+            else -> ("Cereal Storage: {${storage.map { "${it.key.local}=${it.value}"}.joinToString(", ")}}")
+        }
     }
 
     private fun checkStorageCapacity(cereal: Cereal) {
